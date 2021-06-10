@@ -1,0 +1,133 @@
+/* GENERAL */
+*{
+    font-family: "Roboto", sans-serif;
+    font-size: 1.2rem;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background-color: #607D8B;
+}
+
+.wrapper {
+    width: 100%;
+    min-width: 340px;
+    padding: 0 20px;
+}
+
+header{
+    background-color: #F3E9F1;
+}
+
+header img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 160px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body main .main-introduction{
+    margin-bottom: 90px;
+}
+
+body main .main-introduction h1 {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: bold;
+    margin-top: 35px;
+}
+  
+body main .main-introduction h2 {
+    text-align: center;
+    font-weight: lighter;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+main{
+    flex: 1;
+}
+
+footer {
+    background-color: #353535;
+    padding-bottom: 20px;
+    min-width: 340px;
+}
+
+footer h3 {
+    font-family: Shrikhand;
+    color: white;
+    font-weight: 100;
+    font-size: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+/* GRID-Main-Article*/
+#main-content.grid {
+    display: grid;
+    grid-template-rows: auto;
+    grid-gap:45px;
+    grid-template-areas:
+        "item cart";
+  }
+  #item{grid-area: item;}
+  #cart{grid-area: cart;}
+
+/* GRID-Article*/
+#item.grid {
+    background-color: white;
+}
+
+/* GRID-Panier*/
+#cart.grid {
+    background-color: white;
+}
+
+/***************************************/
+/********* SECTION MEDIA QUERY *********/
+/***************************************/
+
+/*@MEDIA-WRAPPER*/
+@media all and (min-width: 426px) and (max-width: 1024px) {
+    .wrapper {
+        padding: 0 30px;
+    }
+}
+
+@media all and (min-width: 1025px) {
+    .wrapper {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 50px;
+    }
+}
+
+/*@MEDIA-Main-content-Grid*/
+@media all and (max-width: 1024px){
+    #main-content.grid{
+        display: grid;
+        grid-gap: 0px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "cart" 
+            "item";
+    }
+}
+
+/*@MEDIA-Main-cart*/
+@media all and (max-width: 1024px){
+    #cart{
+        margin-bottom: 10px;
+    }
+}
