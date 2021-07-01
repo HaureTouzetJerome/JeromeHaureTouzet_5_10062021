@@ -38,7 +38,7 @@ function addToHTML(item){
                                 </article>`;
     
     const colors = document.querySelector("#colors");
-    for (var i = 0; i < item.colors.length; i++) {
+    for (let i = 0; i < item.colors.length; i++) {
         const option = document.createElement("option");
         option.setAttribute("id",`color_${i+1}`);
         option.setAttribute("value",`color_${i+1}`);
@@ -54,7 +54,7 @@ function addToCart(product){
     const btnAddToCart = document.querySelector("#btnAddToCart");
 
     btnAddToCart.addEventListener("click", (event)=>{
-        event.preventDefault();
+        event.preventDefault(); // ne réactualise pas la page
 
         const optionColors = document.querySelector("#colors");
         const idColor = optionColors.value;
@@ -66,9 +66,18 @@ function addToCart(product){
             quantity:1,
             price:product.price / 100
         }
-        
-        localStorage.setItem("selectProduct", selectProduct);
-        console.log(selectProduct);
+
+        const productsLocalStorage = localStorage.getItem("productsCart");
+        let productsCart = [];
+
+        if(productsLocalStorage){
+            productsCart = JSON.parse(productsLocalStorage);
+        }
+
+        productsCart.push(selectProduct);
+        localStorage.setItem("productsCart", JSON.stringify(productsCart));
+
+        console.log(productsCart);
     });
 
 }
