@@ -1,0 +1,24 @@
+.grid-cart{
+    display: grid;
+    grid-row-gap:0.4rem;
+}
+
+.container-infoProduct{
+    background-color: #f3e9f1;
+}
+
+.container-AmountTotal div,
+.container-infoProduct div{
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.container-infoProduct,
+.container-AmountTotal{
+    display: flex;
+    justify-content: space-between;
+    background-color: #f3e9f1;
+    align-items: center;
+    height: 100%;
+    min-height: 50px;
+}
