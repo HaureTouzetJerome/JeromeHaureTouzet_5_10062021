@@ -76,10 +76,7 @@ function addToCart(product){
 
         productsCart.push(selectProduct);
         localStorage.setItem("productsCart", JSON.stringify(productsCart));
-
-        console.log(productsCart);
     });
-
 }
 
 get(`http://localhost:3000/api/teddies/${idProduct}`);
