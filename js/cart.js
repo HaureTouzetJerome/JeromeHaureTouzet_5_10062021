@@ -21,9 +21,10 @@ if (productsLocalStorage){
         infoProduct.setAttribute("class","container-infoProduct");
 
         infoProduct.innerHTML = `<div>${productsCart[i].nameProduct}</div>
-        <div>Quantité: ${productsCart[i].quantity}</div>
-        <div>${productsCart[i].price} €</div>
-        <div>Supprimer l'article</div>`;
+                                 <div>${productsCart[i].color}</div>
+                                 <div>Quantité: ${productsCart[i].quantity}</div>
+                                 <div>${productsCart[i].price} €</div>
+                                 <div>Supprimer l'article</div>`;
         productCart.appendChild(infoProduct);
     }
 

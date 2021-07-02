@@ -41,7 +41,7 @@ function addToHTML(item){
     for (let i = 0; i < item.colors.length; i++) {
         const option = document.createElement("option");
         option.setAttribute("id",`color_${i+1}`);
-        option.setAttribute("value",`color_${i+1}`);
+        option.setAttribute("value",`${item.colors[i]}`);
         option.textContent = item.colors[i];
         colors.appendChild(option);
     }
