@@ -23,11 +23,13 @@
     min-height: 50px;
 }
 
-.btn-deleteProduct:hover{
+.btn-deleteProduct:hover,
+.btn-deleteCart:hover{
     background-color: #d5e3e9;
     cursor: pointer;
 }
-.btn-deleteProduct{
+.btn-deleteProduct,
+.btn-deleteCart{
     background-color: #c6d8e0;
     color:#353535;
     border: none;

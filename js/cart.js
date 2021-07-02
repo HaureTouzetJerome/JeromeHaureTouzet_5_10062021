@@ -32,7 +32,7 @@ if (productsLocalStorage && productsCart.length != 0){
     const amountTotal = document.createElement("div");
     amountTotal.setAttribute("class","container-AmountTotal");
     amountTotal.innerHTML = `<div>Montant total: 59 €</div>
-                             <div>Vider le panier</div>`;
+                             <button class="btn-deleteCart"> Vider le panier </button>`;
     
     productCart.appendChild(amountTotal);
     
@@ -57,3 +57,12 @@ for(let i = 0; i < listButtons.length; i++){
         document.location.reload();
     })
 }
+
+let btnDeleteCart = document.querySelector(".btn-deleteCart");
+console.log("btndelete: ", btnDeleteCart);
+btnDeleteCart.addEventListener("click", (e)=>{
+    console.log("cc");
+    e.preventDefault;
+    localStorage.removeItem("productsCart");
+    document.location.reload();
+})
