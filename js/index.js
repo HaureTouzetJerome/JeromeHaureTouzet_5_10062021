@@ -16,7 +16,7 @@ function addToHTML(item, i){
         mainItem.appendChild(ul);
     }
 
-    const ul = document.querySelector("ul");
+    const ul = document.querySelector("#main-item ul");
     const li = document.createElement("li");
     li.setAttribute("id",`cardI${i+1}`);
     li.innerHTML = `<article class="item-card">
