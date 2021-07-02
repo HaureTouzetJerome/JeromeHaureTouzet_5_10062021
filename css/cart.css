@@ -22,3 +22,20 @@
     height: 100%;
     min-height: 50px;
 }
+
+.btn-deleteProduct:hover{
+    background-color: #d5e3e9;
+    cursor: pointer;
+}
+.btn-deleteProduct{
+    background-color: #c6d8e0;
+    color:#353535;
+    border: none;
+    width: 145px;
+    height: 34px;
+    font-size: 0.8rem;
+    margin-left:10px;
+    margin-right:10px;
+    border-radius: 15px;
+    border: 2px solid white;
+}
