@@ -31,8 +31,7 @@ if (productsLocalStorage && productsCart.length != 0){
 
     const amountTotal = document.createElement("div");
     amountTotal.setAttribute("class","container-AmountTotal");
-    amountTotal.innerHTML = `<div>Montant total: 59 €</div>
-                             <button class="btn-deleteCart"> Vider le panier </button>`;
+    amountTotal.innerHTML = `<button class="btn-deleteCart"> Vider le panier </button>`;
     
     productCart.appendChild(amountTotal);
     
@@ -58,11 +57,29 @@ for(let i = 0; i < listButtons.length; i++){
     })
 }
 
-let btnDeleteCart = document.querySelector(".btn-deleteCart");
-console.log("btndelete: ", btnDeleteCart);
-btnDeleteCart.addEventListener("click", (e)=>{
-    console.log("cc");
-    e.preventDefault;
-    localStorage.removeItem("productsCart");
-    document.location.reload();
-})
+if(document.querySelector(".btn-deleteCart")){
+    let btnDeleteCart = document.querySelector(".btn-deleteCart");
+    btnDeleteCart.addEventListener("click", (e)=>{
+        e.preventDefault();
+        localStorage.removeItem("productsCart");
+        document.location.reload();
+    })
+}
+
+let lstPricesCart = [];
+
+for(i=0; i < productsCart.length; i++){
+    let priceProduct = productsCart[i].price;
+    lstPricesCart.push(priceProduct);
+}
+
+if(lstPricesCart.length > 0){
+    const amountTotal = lstPricesCart.reduce(function(a,b){
+        return a + b;
+    });
+
+    const addPriceToHTML = `<div>Montant total: ${amountTotal} €</div>`;
+    let containerAmountTotal = document.querySelector(".container-AmountTotal");
+    containerAmountTotal.insertAdjacentHTML("afterbegin", addPriceToHTML);
+}
+
