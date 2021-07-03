@@ -45,6 +45,7 @@ function get(url) {
     }).then(function(value) {
         const products = value;
         add(products);
+        addQuantityToHTML();
     }).catch(function(err) {
         console.log('Fetch problem: ' + err.message);
     });

@@ -1,14 +1,9 @@
-const productsLocalStorage = localStorage.getItem("productsCart");
-let productsCart = [];
-
-if(productsLocalStorage){
-    productsCart = JSON.parse(productsLocalStorage);
-}
+let productsCart = getProductsCart();
 
 const mainContainer = document.querySelector("#main-item");
 const titleCart = document.createElement("h2");
 
-if (productsLocalStorage && productsCart.length != 0){
+if (productsCart.length != 0){
     titleCart.innerHTML = "Voici le contenu de votre panier";
 
     const productCart = document.createElement("div");
@@ -82,4 +77,11 @@ if(lstPricesCart.length > 0){
     let containerAmountTotal = document.querySelector(".container-AmountTotal");
     containerAmountTotal.insertAdjacentHTML("afterbegin", addPriceToHTML);
 }
+
+addQuantityToHTML();
+
+
+
+
+
 

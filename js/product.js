@@ -11,6 +11,7 @@ function get(url) {
         const product = value;
         addToHTML(product);
         addToCart(product);
+        addQuantityToHTML();
     }).catch(function(err) {
         console.log('Fetch problem: ' + err.message);
     });
@@ -34,6 +35,9 @@ function addToHTML(item){
                                         <label>Nos choix de couleurs disponibles: </label>
                                         <select id="colors">
                                         </select>
+                                        <label>Quantité: </label>
+                                        <select id="quantityProduct">
+                                        </select>
                                     </form>
                                 </article>`;
     
@@ -44,6 +48,15 @@ function addToHTML(item){
         option.setAttribute("value",`${item.colors[i]}`);
         option.textContent = item.colors[i];
         colors.appendChild(option);
+    }
+
+    const quantity = document.querySelector("#quantityProduct");
+    for (let i = 0; i < 3; i++) {
+        const option = document.createElement("option");
+        option.setAttribute("id",`quantity_${i+1}`);
+        option.setAttribute("value",`${i+1}`);
+        option.textContent = i+1;
+        quantity.appendChild(option);
     }
 
     const form = document.querySelector("#product");
@@ -59,12 +72,15 @@ function addToCart(product){
         const optionColors = document.querySelector("#colors");
         const idColor = optionColors.value;
 
+        const quantity = document.querySelector("#quantityProduct");
+        const selectQuantity = quantity.value;
+
         const selectProduct = {
             id:product._id,
             nameProduct:product.name,
             color:idColor,
-            quantity:1,
-            price:product.price / 100
+            quantity:selectQuantity,
+            price:product.price * selectQuantity / 100
         }
 
         const productsLocalStorage = localStorage.getItem("productsCart");
