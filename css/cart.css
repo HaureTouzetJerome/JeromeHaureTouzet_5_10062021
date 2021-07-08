@@ -24,20 +24,74 @@
 }
 
 .btn-deleteProduct:hover,
-.btn-deleteCart:hover{
+.btn-deleteCart:hover,
+.btn-cmd:hover{
     background-color: #d5e3e9;
     cursor: pointer;
 }
 .btn-deleteProduct,
-.btn-deleteCart{
+.btn-deleteCart,
+.btn-cmd{
     background-color: #c6d8e0;
     color:#353535;
     border: none;
     width: 145px;
     height: 34px;
     font-size: 0.8rem;
-    margin-left:10px;
     margin-right:10px;
     border-radius: 15px;
     border: 2px solid white;
+}
+
+/* Formulaire */
+#orderForm *{
+    color: #353535;
+}
+#orderForm h2{
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+form #description {
+    margin-bottom: 20px;
+}
+form em {
+    font-weight: bold;
+}
+form fieldset {
+    background-color:#d5e3e9;
+    border-color: white;
+    border-radius: 15px;
+    border-style: dotted;
+    border-width: 0.1rem;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+form legend {
+    padding-left: 7px;
+    padding-right: 7px;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+form label {
+    width: 110px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 2px;
+    margin-bottom: 10px;
+}
+form input:focus {
+    background: #F3E9F1;
+}
+form input {
+    width: 400px;
+    height: 50px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+form .btn-cmd {
+    font-size: 1.2rem;
+    font-variant: small-caps;
+    width: 250px;
+    height: 50px;
+    margin-bottom: 20px;
 }

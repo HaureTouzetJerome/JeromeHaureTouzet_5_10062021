@@ -80,6 +80,8 @@ if(lstPricesCart.length > 0){
 
 addQuantityToHTML();
 
+// Récupérer toutes les données du formulaire
+
 
 
 
