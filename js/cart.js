@@ -79,8 +79,63 @@ if(lstPricesCart.length > 0){
 }
 
 addQuantityToHTML();
+addOrderFormToHTML();
 
-// Récupérer toutes les données du formulaire
+const btnSendOrder = document.querySelector("#btnOrderSend");
+btnSendOrder.addEventListener("click", (e)=>{
+
+     e.preventDefault();
+
+    const orderForm = {
+        firstName:document.querySelector("#firstName").value,
+        lastName:document.querySelector("#lastName").value,
+        address:document.querySelector("#address").value,
+        city:document.querySelector("#city").value,
+        email:document.querySelector("#email").value
+    }
+
+    localStorage.setItem("orderForm", JSON.stringify(orderForm));
+
+    const orderToSend = {
+        productsCart,
+        orderForm
+    }
+})
+
+const order = JSON.parse(localStorage.getItem("orderForm"));
+setValueOrderForm(order);
+
+
+function addOrderFormToHTML(){
+    const orderForm = document.querySelector("#orderForm");
+    orderForm.innerHTML = ` <h2>Formulaire de commande à remplir</h2>
+                            <form action="#">
+                            <div id="description">Les champs marqué par <em>*</em> sont <em>obligatoires</em></div>
+                            <fieldset>
+                                <legend>Contact</legend>
+                                <label for="firstName">Prénom <em>*</em></label>
+                                <input id="firstName" placeholder=" Votre prénom" autofocus="" required><br>
+                                <label for="lastName">Nom <em>*</em></label>
+                                <input id="lastName" placeholder=" Votre nom" required><br>
+                                <label for="address">Adresse <em>*</em></label>
+                                <input id="address" placeholder=" Votre adresse" required><br>
+                                <label for="city">Ville <em>*</em></label>
+                                <input id="city" placeholder=" Votre ville" required><br>
+                                <label for="email">Email <em>*</em></label>
+                                <input id="email" type="email" placeholder=" prenomnom@gmail.com" required pattern="[a-zA-Z]*.[a-zA-Z]*@gmail.com"><br>
+                            </fieldset>
+                            <input id="btnOrderSend" class="btn-cmd" type="submit" value="Passer ma commande">
+                            </form>
+                          `
+}
+
+function setValueOrderForm(order){
+    document.querySelector("#firstName").value = order.lastName;
+    document.querySelector("#lastName").value = order.firstName;
+    document.querySelector("#address").value = order.address;
+    document.querySelector("#city").value = order.city;
+    document.querySelector("#email").value = order.email;
+}
 
 
 
