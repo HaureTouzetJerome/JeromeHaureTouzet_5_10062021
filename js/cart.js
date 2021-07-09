@@ -98,10 +98,18 @@ btnSendOrder.addEventListener("click", (e)=>{
     if(name_validation(orderForm.firstName) && name_validation(orderForm.lastName) &&
        name_validation(orderForm.city) && address_validation(orderForm.address) && email_validation(orderForm.email)){
         localStorage.setItem("orderForm", JSON.stringify(orderForm));
+        
+        if(productsCart.length != 0){
 
-        const orderToSend = {
-            productsCart,
-            orderForm
+            const products = getArrayIdProducts(productsCart);
+
+            let contact = new Contact(orderForm.firstName, orderForm.lastName, orderForm.address,
+                                        orderForm.city, orderForm.email);
+            const orderTeddies = {
+                contact,
+                products
+            }
+            post('http://localhost:3000/api/teddies/order', orderTeddies);
         }
     }
     else{
@@ -125,7 +133,9 @@ btnSendOrder.addEventListener("click", (e)=>{
 
 
 const order = JSON.parse(localStorage.getItem("orderForm"));
-setValueOrderForm(order);
+if(order != null){
+    setValueOrderForm(order);
+}
 
 function addOrderFormToHTML(){
     const orderForm = document.querySelector("#orderForm");
@@ -247,6 +257,38 @@ function removeMessageValidationToHTML(idValidation, nameField){
     }
 }
 
+// Requête POST à l'API
+function post(url, orderTeddies) {
 
+    var init = { method: 'POST',
+                 body: JSON.stringify(orderTeddies),
+                 headers:{
+                    "Content-Type":"application/json"}
+               };
 
+    fetch(url, init).then(function(res) {
+        if (res.ok) {
+            return res.json();
+        }
+    }).then(function(value) {
+        const responseOrder = value;
+        console.log(responseOrder);
+    }).catch(function(err) {
+        console.log('Fetch problem: ' + err.message);
+    });
+}
 
+function Contact(firstName, lastName, address, city, email) {
+    this.firstName = firstName;
+    this.lastName  = lastName;
+    this.address   = address;
+    this.city      = city;
+    this.email     = email;
+}
+
+function getArrayIdProducts(productsCart){
+    const productsId = productsCart.map(function(element){
+        return element.id;
+    });
+    return productsId;
+}
