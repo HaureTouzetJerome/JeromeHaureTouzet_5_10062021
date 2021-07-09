@@ -81,10 +81,9 @@ if(lstPricesCart.length > 0){
 addQuantityToHTML();
 addOrderFormToHTML();
 
-const btnSendOrder = document.querySelector("#btnOrderSend");
+const btnSendOrder = document.querySelector(".btn-order");
 btnSendOrder.addEventListener("click", (e)=>{
-
-     e.preventDefault();
+    e.preventDefault();
 
     const orderForm = {
         firstName:document.querySelector("#firstName").value,
@@ -94,17 +93,39 @@ btnSendOrder.addEventListener("click", (e)=>{
         email:document.querySelector("#email").value
     }
 
-    localStorage.setItem("orderForm", JSON.stringify(orderForm));
+    removeALLMessagesValidation();
 
-    const orderToSend = {
-        productsCart,
-        orderForm
+    if(name_validation(orderForm.firstName) && name_validation(orderForm.lastName) &&
+       name_validation(orderForm.city) && address_validation(orderForm.address) && email_validation(orderForm.email)){
+        localStorage.setItem("orderForm", JSON.stringify(orderForm));
+
+        const orderToSend = {
+            productsCart,
+            orderForm
+        }
+    }
+    else{
+        if(!name_validation(orderForm.firstName)){
+            addMessageValidation("firstName");
+        }
+        if(!name_validation(orderForm.lastName)){
+            addMessageValidation("lastName");
+        }
+        if(!address_validation(orderForm.address)){
+            addMessageValidation("address");
+        }
+        if(!name_validation(orderForm.city)){
+            addMessageValidation("city");
+        }
+        if(!email_validation(orderForm.email)){
+            addMessageValidation("email");
+        }
     }
 })
 
+
 const order = JSON.parse(localStorage.getItem("orderForm"));
 setValueOrderForm(order);
-
 
 function addOrderFormToHTML(){
     const orderForm = document.querySelector("#orderForm");
@@ -113,18 +134,28 @@ function addOrderFormToHTML(){
                             <div id="description">Les champs marqué par <em>*</em> sont <em>obligatoires</em></div>
                             <fieldset>
                                 <legend>Contact</legend>
-                                <label for="firstName">Prénom <em>*</em></label>
-                                <input id="firstName" placeholder=" Votre prénom" autofocus="" required><br>
-                                <label for="lastName">Nom <em>*</em></label>
-                                <input id="lastName" placeholder=" Votre nom" required><br>
-                                <label for="address">Adresse <em>*</em></label>
-                                <input id="address" placeholder=" Votre adresse" required><br>
-                                <label for="city">Ville <em>*</em></label>
-                                <input id="city" placeholder=" Votre ville" required><br>
-                                <label for="email">Email <em>*</em></label>
-                                <input id="email" type="email" placeholder=" prenomnom@gmail.com" required pattern="[a-zA-Z]*.[a-zA-Z]*@gmail.com"><br>
+                                <div id="validationFirstName">
+                                    <label for="firstName">Prénom <em>*</em></label>
+                                    <input id="firstName" placeholder=" Votre prénom" autofocus="" required><br>
+                                </div>
+                                <div id="validationLastName"> 
+                                    <label for="lastName">Nom <em>*</em></label>
+                                    <input id="lastName" placeholder=" Votre nom" required><br>
+                                </div>
+                                <div id="validationAddress"> 
+                                    <label for="address">Adresse <em>*</em></label>
+                                    <input id="address" placeholder=" Votre adresse" required><br>
+                                </div>
+                                <div id="validationCity"> 
+                                    <label for="city">Ville <em>*</em></label>
+                                    <input id="city" placeholder=" Votre ville" required><br>
+                                </div>
+                                <div id="validationEmail">                
+                                    <label for="email">Email <em>*</em></label>
+                                    <input id="email" type="email" placeholder=" prenomnom@gmail.com" required><br>
+                                </div>
                             </fieldset>
-                            <input id="btnOrderSend" class="btn-cmd" type="submit" value="Passer ma commande">
+                            <input class="btn-order" type="submit" value="Passer ma commande">
                             </form>
                           `
 }
@@ -137,7 +168,84 @@ function setValueOrderForm(order){
     document.querySelector("#email").value = order.email;
 }
 
+function name_validation(field){
+    let field_isValid = false;
+    if(/^[A-Za-zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ' -]{2,50}$/.test(field)){
+        field_isValid = true;
+    }
+    return field_isValid
+}
 
+function address_validation(field){
+    let field_isValid = false;
+    if(/^[A-Za-z0-9àáâãäåçèéêëìíîïðòóôõöùúûüýÿ' -]{2,50}$/.test(field)){
+        field_isValid = true;
+    }
+    return field_isValid
+}
+
+function email_validation(field){
+    let field_isValid = false;
+    if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(field)){
+        field_isValid = true;
+    }
+    return field_isValid
+}
+
+function addMessageValidation(valueof_OrderForm){
+    switch (valueof_OrderForm) {
+        case 'firstName':
+            addMessageValidationToHTML("#validationFirstName", "firstName", "prénom");
+          break;
+        case 'lastName':
+            addMessageValidationToHTML("#validationLastName", "lastName", "nom");
+          break;
+        case 'address':
+            addMessageValidationToHTML("#validationAddress", "address", "adresse");
+          break;
+        case 'city':
+            addMessageValidationToHTML("#validationCity", "city", "ville");
+          break;
+        case 'email':
+            addMessageValidationToHTML("#validationEmail", "email", "email");
+          break;
+    }
+}
+
+function addMessageValidationToHTML(idValidation, nameField, fieldFr){
+    const validationEmail = document.querySelector(idValidation);
+    validationEmail.setAttribute("class","form-group has-validation-error");
+    const inputEmail = document.querySelector(`#${nameField}`);
+    inputEmail.setAttribute("class","form-control invalid");
+    
+    if(!document.querySelector(`${idValidation} .validation-error`)){
+        const messageValidation = document.createElement("div");
+        messageValidation.setAttribute("id", `${nameField}-validation-error`);
+        messageValidation.setAttribute("class", "validation-error");
+        messageValidation.textContent = `${fieldFr} invalide`;
+        validationEmail.appendChild(messageValidation);
+    }
+}
+
+function removeALLMessagesValidation(){
+    removeMessageValidationToHTML("#validationFirstName", "firstName");
+    removeMessageValidationToHTML("#validationLastName", "lastName");
+    removeMessageValidationToHTML("#validationAddress", "address");
+    removeMessageValidationToHTML("#validationCity", "city");
+    removeMessageValidationToHTML("#validationEmail", "email");
+}
+
+function removeMessageValidationToHTML(idValidation, nameField){
+    const validationField = document.querySelector(idValidation);
+    validationField.removeAttribute("class");
+    const inputField = document.querySelector(`#${nameField}`);
+    inputField.removeAttribute("class");
+    
+    const messageValidation = document.querySelector(`#${nameField}-validation-error`);
+    if(messageValidation != null){
+        validationField.removeChild(messageValidation);
+    }
+}
 
 
 

@@ -25,13 +25,13 @@
 
 .btn-deleteProduct:hover,
 .btn-deleteCart:hover,
-.btn-cmd:hover{
+.btn-order:hover{
     background-color: #d5e3e9;
     cursor: pointer;
 }
 .btn-deleteProduct,
 .btn-deleteCart,
-.btn-cmd{
+.btn-order{
     background-color: #c6d8e0;
     color:#353535;
     border: none;
@@ -44,7 +44,7 @@
 }
 
 /* Formulaire */
-#orderForm *{
+#orderForm label{
     color: #353535;
 }
 #orderForm h2{
@@ -79,7 +79,7 @@ form label {
     margin-left: 2px;
     margin-bottom: 10px;
 }
-form input:focus {
+fieldset input:focus {
     background: #F3E9F1;
 }
 form input {
@@ -88,10 +88,27 @@ form input {
     margin-top: 7px;
     margin-bottom: 7px;
 }
-form .btn-cmd {
+form .btn-order {
     font-size: 1.2rem;
     font-variant: small-caps;
     width: 250px;
     height: 50px;
     margin-bottom: 20px;
+}
+
+/* -------------------------------------------------- */
+.form-control.invalid {
+    border-style:solid;
+    border-color: red;
+}
+.form-group {
+    position: relative;
+}
+.form-group .validation-error {
+    position: absolute;
+    right: 25px;
+    top: 5px;
+  
+    color: red;
+    font-size: 14px;
 }
