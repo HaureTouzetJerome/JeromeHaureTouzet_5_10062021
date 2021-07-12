@@ -45,8 +45,19 @@ for(let i = 0; i < listButtons.length; i++){
 
         let idProductToDelete = productsCart[i].id;
         index = productsCart.findIndex(element => element.id === idProductToDelete);
-        productsCart.splice(index, 1);
+        let currentQuantityProduct = productsCart[index].quantity;
+        if(currentQuantityProduct > 1){
+            productsCart[index].quantity -= 1;
+        }
+        else{
+            productsCart.splice(index, 1);
+        }
+
         localStorage.setItem("productsCart", JSON.stringify(productsCart));
+        if(productsCart.length === 0){
+            localStorage.removeItem("productsCart");
+            localStorage.removeItem("quantityCart");
+        }
         document.location.reload();
     })
 }
@@ -56,6 +67,7 @@ if(document.querySelector(".btn-deleteCart")){
     btnDeleteCart.addEventListener("click", (e)=>{
         e.preventDefault();
         localStorage.removeItem("productsCart");
+        localStorage.removeItem("quantityCart");
         document.location.reload();
     })
 }
@@ -63,7 +75,7 @@ if(document.querySelector(".btn-deleteCart")){
 let lstPricesCart = [];
 
 for(i=0; i < productsCart.length; i++){
-    let priceProduct = productsCart[i].price;
+    let priceProduct = productsCart[i].price * productsCart[i].quantity;
     lstPricesCart.push(priceProduct);
 }
 

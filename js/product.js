@@ -108,6 +108,7 @@ function addToCart(product){
             productsCart.push(selectProduct);
             localStorage.setItem("productsCart", JSON.stringify(productsCart));
         }
+        document.location.reload();
     });
 }
 
