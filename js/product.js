@@ -89,14 +89,16 @@ function addToCart(product){
         if(productsLocalStorage){
             productsCart = JSON.parse(productsLocalStorage);
             const resultMap = productsCart.map(function(element){
-                if(element.id === selectProduct.id){
+                if( element.id === selectProduct.id &&
+                    element.color === selectProduct.color){
                     element.quantity += selectProduct.quantity;
                 }
                 return element;
             });
 
             const idIdentic = (element) => element.id === selectProduct.id;
-            if (productsCart.some(idIdentic)){
+            const colorIdentic = (element) => element.color === selectProduct.color;
+            if (productsCart.some(idIdentic) && productsCart.some(colorIdentic)){
                 localStorage.setItem("productsCart", JSON.stringify(resultMap));
             }
             else{

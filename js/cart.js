@@ -44,7 +44,9 @@ for(let i = 0; i < listButtons.length; i++){
         event.preventDefault();
 
         let idProductToDelete = productsCart[i].id;
-        index = productsCart.findIndex(element => element.id === idProductToDelete);
+        let colorProductToDelete = productsCart[i].color;
+        index = productsCart.findIndex(element => element.id === idProductToDelete && 
+                                       element.color === colorProductToDelete);
         let currentQuantityProduct = productsCart[index].quantity;
         if(currentQuantityProduct > 1){
             productsCart[index].quantity -= 1;
