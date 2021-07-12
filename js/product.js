@@ -73,7 +73,7 @@ function addToCart(product){
         const idColor = optionColors.value;
 
         const quantity = document.querySelector("#quantityProduct");
-        const selectQuantity = quantity.value;
+        const selectQuantity = parseInt(quantity.value);
 
         const selectProduct = {
             id:product._id,
@@ -88,10 +88,26 @@ function addToCart(product){
 
         if(productsLocalStorage){
             productsCart = JSON.parse(productsLocalStorage);
-        }
+            const resultMap = productsCart.map(function(element){
+                if(element.id === selectProduct.id){
+                    element.quantity += selectProduct.quantity;
+                }
+                return element;
+            });
 
-        productsCart.push(selectProduct);
-        localStorage.setItem("productsCart", JSON.stringify(productsCart));
+            const idIdentic = (element) => element.id === selectProduct.id;
+            if (productsCart.some(idIdentic)){
+                localStorage.setItem("productsCart", JSON.stringify(resultMap));
+            }
+            else{
+                productsCart.push(selectProduct);
+                localStorage.setItem("productsCart", JSON.stringify(productsCart));
+            }
+        }
+        else{
+            productsCart.push(selectProduct);
+            localStorage.setItem("productsCart", JSON.stringify(productsCart));
+        }
     });
 }
 

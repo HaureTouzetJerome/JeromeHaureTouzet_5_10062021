@@ -1,5 +1,4 @@
 let productsCart = getProductsCart();
-
 const mainContainer = document.querySelector("#main-item");
 const titleCart = document.createElement("h2");
 
