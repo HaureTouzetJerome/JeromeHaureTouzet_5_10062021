@@ -85,7 +85,7 @@ if(lstPricesCart.length > 0){
     const amountTotal = lstPricesCart.reduce(function(a,b){
         return a + b;
     });
-
+    localStorage.setItem("amountTotalCart", amountTotal);
     const addPriceToHTML = `<div>Montant total: ${amountTotal} €</div>`;
     let containerAmountTotal = document.querySelector(".container-AmountTotal");
     containerAmountTotal.insertAdjacentHTML("afterbegin", addPriceToHTML);
@@ -285,7 +285,7 @@ function post(url, orderTeddies) {
         }
     }).then(function(value) {
         const responseOrder = value;
-        console.log(responseOrder);
+        localStorage.setItem("orderId", responseOrder.orderId);
     }).catch(function(err) {
         console.log('Fetch problem: ' + err.message);
     });
