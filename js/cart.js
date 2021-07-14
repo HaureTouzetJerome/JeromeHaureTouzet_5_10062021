@@ -286,6 +286,7 @@ function post(url, orderTeddies) {
     }).then(function(value) {
         const responseOrder = value;
         localStorage.setItem("orderId", responseOrder.orderId);
+        window.location = "confirmationOrder.html";
     }).catch(function(err) {
         console.log('Fetch problem: ' + err.message);
     });

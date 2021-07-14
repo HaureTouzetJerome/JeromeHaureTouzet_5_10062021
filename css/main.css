@@ -150,6 +150,20 @@ main .main-introduction h2 {
     padding-bottom: 10px;
 }
 
+#main-orderConfirm .confirmOrder h2{
+    color: #353535;
+    font-size: 1.4rem;
+}
+
+#main-orderConfirm .confirmOrder p{
+    color: #353535;
+    font-size: 0.8rem;
+}
+
+#main-orderConfirm .confirmOrder p:nth-child(6){
+    text-transform: uppercase;
+}
+
 footer {
     background-color: #353535;
     padding-bottom: 20px;
